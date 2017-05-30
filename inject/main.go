@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	a := factory.New("pkga.Alpha")
-	b := factory.New("pkgb.Beta")
-	c := factory.New("pkga.Gamma")
+	a, _ := factory.New("pkga.Alpha")
+	b, _ := factory.New("pkgb.Beta")
+	c, _ := factory.New("pkga.Gamma")
 
 	fmt.Printf("%T %T %T\n", a, b, c)
 }
