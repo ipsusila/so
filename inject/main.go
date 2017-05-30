@@ -12,7 +12,7 @@ func main() {
 	a, _ := factory.New("pkga.Alpha")
 	b, _ := factory.New("pkgb.Beta")
 	c, _ := factory.New("pkga.Gamma")
-	d, _ := factory.New("mypackage.NotExists")
+	d, _ := factory.New("mypackage.Unknown")
 
 	fmt.Printf("%T %T %T %T\n", a, b, c, d)
 }
