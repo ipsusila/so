@@ -6,7 +6,7 @@ import (
 )
 
 type Factory interface {
-	New(name string) interface{}
+	New(name string) (interface{}, bool)
 }
 
 var (
@@ -28,16 +28,14 @@ func Register(pkgName string, f Factory) {
 	factories[pkgName] = f
 }
 
-func New(typeName string) interface{} {
+func New(typeName string) (interface{}, bool) {
 	items := strings.Split(typeName, ".")
-	if len(items) < 2 {
-		return nil
+	if len(items) >= 2 {
+		mu.RLock()
+		defer mu.RUnlock()
+		if f, exist := factories[items[0]]; exist {
+			return f.New(items[1])
+		}
 	}
-
-	mu.RLock()
-	defer mu.RUnlock()
-	if f, exist := factories[items[0]]; exist {
-		return f.New(items[1])
-	}
-	return nil
+	return nil, false
 }

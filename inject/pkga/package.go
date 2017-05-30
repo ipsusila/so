@@ -9,16 +9,16 @@ type Alpha struct{}
 type Beta struct{}
 type Gamma struct{}
 
-func (f *thisFactory) New(name string) interface{} {
+func (f *thisFactory) New(name string) (interface{}, bool) {
 	switch name {
 	case "Alpha":
-		return &Alpha{}
+		return &Alpha{}, true
 	case "Beta":
-		return &Beta{}
+		return &Beta{}, true
 	case "Gamma":
-		return &Gamma{}
+		return &Gamma{}, true
 	}
-	return nil
+	return nil, false
 }
 
 func init() {
